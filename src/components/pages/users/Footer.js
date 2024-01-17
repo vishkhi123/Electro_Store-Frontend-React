@@ -1,10 +1,14 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
 
 const Footer = () => {
   return (
-    <div>
-      <h1>This is Footer</h1>
-    </div>
+    <Container fluid className='bg-dark p-5 text-white text-center'>
+
+    <h3>We provide best products</h3>
+    <p>All rights reserved - <b>Made With ❤️ By Vish 😎</b></p>
+
+    </Container>
   )
 }
 

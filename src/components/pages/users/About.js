@@ -1,9 +1,16 @@
 import React from 'react'
+import Base from './Base'
 
 const About = () => {
   return (
     <div>
-      This is About Page
+    <Base 
+    title='Electro Store / About Us'
+    description={null}
+    >
+        <h1>This is About Page</h1>
+      </Base>
+      
     </div>
   )
 }

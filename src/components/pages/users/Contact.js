@@ -3,12 +3,15 @@ import Base from './Base'
 
 const Contact = () => {
   return (
-    <Base>
     <div>
-
-      This is Contact Us page
+    <Base 
+    title='Electro Store / Contact Us'
+    description={null}
+    >
+        <h1>This is Contact Us Page</h1>
+      </Base>
+      
     </div>
-    </Base>
   )
 }
 

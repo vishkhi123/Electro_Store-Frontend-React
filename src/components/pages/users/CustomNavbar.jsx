@@ -19,7 +19,7 @@ const CustomNavbar = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="m-auto">
          {/* //this helps in ms,m,mr changes its position left right */}
-            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link as={NavLink} to={'/services'}>Features</Nav.Link>
             
             <NavDropdown title="Categories" id="collapsible-nav-dropdown" >
               <NavDropdown.Item href="#action/3.1">Branded Phones</NavDropdown.Item>

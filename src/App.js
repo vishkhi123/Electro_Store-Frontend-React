@@ -11,6 +11,7 @@ import Services from './components/pages/users/Services';
 import Cart from './components/pages/users/Cart';
 import CustomNavbar from './components/pages/users/CustomNavbar';
 import Contact from './components/pages/users/Contact';
+import { Flip, ToastContainer, Zoom } from 'react-toastify';
 
 
 function App() {
@@ -20,6 +21,10 @@ function App() {
   // setting up routing 
    
      <BrowserRouter>
+     <ToastContainer 
+      theme='dark'
+      transition={Flip}
+     />
      <CustomNavbar/>
   
      <Routes>
