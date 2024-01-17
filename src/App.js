@@ -1,36 +1,50 @@
 
-import { Button,Modal } from 'react-bootstrap';
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { useState } from 'react';
+import Index from './components/pages/users/Index';
+import About from './components/pages/users/About';
+import Dashboard from './components/pages/users/Dashboard';
+import Profile from './components/pages/users/Profile';
+import AboutUser from './components/pages/users/AboutUser';
+import Services from './components/pages/users/Services';
+import Cart from './components/pages/users/Cart';
+import CustomNavbar from './components/pages/users/CustomNavbar';
+
 
 function App() {
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+ 
   return (
-    <div>
+  // setting up routing 
+   
+     <BrowserRouter>
+     <CustomNavbar/>
+  
+     <Routes>
+       <Route path='/' element=<Index/> />
+       <Route path='/about' element=<About/> />
+       <Route path='/services' element=<Services/> />
+       <Route path='/cart' element=<Cart/> />
+       <Route path='/user' element=<Dashboard/> >
+             {/*nested route me "/" allowed nai he and parent me outlet dena padega */}
+           <Route path='profile' element=<Profile/>/>
+           <Route path='aboutUser' element=<AboutUser/>/>
 
-     <Button variant="secondary" size='lg' onClick={handleShow}>CLick Me</Button>
+       </Route>
+     </Routes>
+     
+   </BrowserRouter>
 
-     <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+
+
   );
+
+  
+   
+
+   
+  
 }
 
 export default App;
