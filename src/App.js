@@ -10,6 +10,7 @@ import AboutUser from './components/pages/users/AboutUser';
 import Services from './components/pages/users/Services';
 import Cart from './components/pages/users/Cart';
 import CustomNavbar from './components/pages/users/CustomNavbar';
+import Contact from './components/pages/users/Contact';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
        <Route path='/about' element=<About/> />
        <Route path='/services' element=<Services/> />
        <Route path='/cart' element=<Cart/> />
+       <Route path='/contact' element=<Contact/> />
        <Route path='/user' element=<Dashboard/> >
              {/*nested route me "/" allowed nai he and parent me outlet dena padega */}
            <Route path='profile' element=<Profile/>/>
