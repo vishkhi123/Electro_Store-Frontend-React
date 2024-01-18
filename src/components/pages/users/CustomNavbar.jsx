@@ -11,8 +11,10 @@ const CustomNavbar = () => {
     <Navbar collapseOnSelect expand="lg" bg='dark' variant='dark' >
       <Container>
         <Navbar.Brand as={NavLink} to={'/'}>
-        <img src="/assets/electrostore1.jpg" alt="logo" width="30" height="24" ></img>
-        Electro Store
+        <img src="/assets/electrostore1.jpg" alt="logo" width="30" height="30" ></img>
+
+        <span className='ms-1'>Electro Store</span>
+       
         
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
