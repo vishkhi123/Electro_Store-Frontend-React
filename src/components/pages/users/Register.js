@@ -3,6 +3,7 @@ import Base from "./Base";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { registerUser } from "../services/user.service";
 
 const Register = () => {
 
@@ -25,6 +26,11 @@ const Register = () => {
 
     }
 
+    const [errorData,setErrorData]=useState({
+      isError:false,
+      errorData:null
+    })
+
     const clearData=()=>{
       toast.info("Reset")
       setData({
@@ -36,12 +42,66 @@ const Register = () => {
       gender:""
 
       })
+      setErrorData({
+        isError:false,
+        errorData:null
+      })
     }
 
-    const [errorData,setErrorData]=useState({
-      isError:false,
-      errorData:null
-    })
+   
+
+
+    const submitForm=(event)=>{
+
+      event.preventDefault();
+      console.log(data);
+      //validate Client Side
+
+      if(data.name==undefined || data.name.trim()=='')
+      {
+        toast.error("Name is required !!!!!");
+        return
+      }
+      if(data.email==undefined || data.email.trim()=='')
+      {
+        toast.error("Email is required !!!!!");
+        return
+      }
+        //basic checks
+        if(data.password==undefined || data.password.trim()=='')
+      {
+        toast.error("Password is required !!!!!");
+        return
+      }
+      if(data.confirmPassword==undefined || data.confirmPassword.trim()=='')
+      {
+        toast.error("Password is required !!!!!");
+        return
+      }
+
+      if(data.password != data.confirmPassword)
+      {
+        toast.error("Password does not Match");
+        return
+      }
+      //call api
+      //Now Register User
+      registerUser(data)
+      .then(userData=>{
+        console.log(userData);
+        toast.success("User Created Successfully!!")
+        clearData()
+      })
+      .catch(error=>{
+        console.log(error)
+        setErrorData({
+          isError:true,
+          errorData:error
+        })
+        toast.error("Error in creating user ! Try Again")
+      })
+
+    }
 
 
   const RegisterForm = () => {
@@ -68,8 +128,10 @@ const Register = () => {
 
                 <h3 className="mb-4 text-center">Store SignUp Here</h3>
 
+                <Form noValidate onSubmit={submitForm}>
+
                 {/* User Name */}
-                <Form>
+               
                   <Form.Group className="mb-3" controlId="formName">
                     <Form.Label>Enter your name</Form.Label>
                     <Form.Control 
@@ -77,7 +139,9 @@ const Register = () => {
                     placeholder="Enter name"
                     onChange={(event)=>handelChange(event,'name')}
                     value={data.name}
+                    isInvalid={errorData.errorData?.response?.data?.name}
                      />
+                     <Form.Control.Feedback type="invalid">{errorData.errorData?.response?.data?.name}</Form.Control.Feedback>
                   </Form.Group>
                   {/* User Email */}
                   <Form.Group className="mb-3" controlId="formEmail">
@@ -87,7 +151,10 @@ const Register = () => {
                     placeholder="Enter Email"
                     onChange={(event)=>handelChange(event,'email')}
                     value={data.email}
+                    isInvalid={errorData.errorData?.response?.data?.email}
                      />
+                    <Form.Control.Feedback type="invalid">{errorData.errorData?.response?.data?.email}</Form.Control.Feedback>
+
                   </Form.Group>
                   {/* User Password */}
                   <Form.Group className="mb-3" controlId="formPassword">
@@ -97,7 +164,10 @@ const Register = () => {
                       placeholder="Enter Password"
                       onChange={(event)=>handelChange(event,'password')}
                       value={data.password}
+                      isInvalid={errorData.errorData?.response?.data?.password}
                     />
+                     <Form.Control.Feedback type="invalid">{errorData.errorData?.response?.data?.password}</Form.Control.Feedback>
+
                     </Form.Group>
                     {/* Conform User Password */}
                   <Form.Group className="mb-3" controlId="formPassword">
@@ -124,6 +194,7 @@ const Register = () => {
                         value={'male'}
                         checked={data.gender=='male'}
                         onChange={(event)=>handelChange(event,'gender')}
+                        
 
                       />
                       <Form.Check
@@ -135,7 +206,9 @@ const Register = () => {
                         value={'female'}
                         checked={data.gender=='female'}
                         onChange={(event)=>handelChange(event,'gender')}
+                       
                       />
+
                     </div>
                   </Form.Group>
 
@@ -147,19 +220,25 @@ const Register = () => {
                   style={{ height: '100px' }} 
                   onChange={(event)=>handelChange(event,'about')}
                   value={data.about}
+                  isInvalid={errorData.errorData?.response?.data?.about}
                   />
+                <Form.Control.Feedback type="invalid">{errorData.errorData?.response?.data?.about}</Form.Control.Feedback>
+
+                  
                     
                   </Form.Group>
 
-                </Form>
+                
                 <Container>
                   <p className="text-center">Already registered ! <Link to='/login'>Login </Link> </p>
                 </Container>
 
                 <Container className="text-center">
-                  <Button className="m-2" variant="success">REGISTER</Button>
+                  <Button type="submit" className="m-2" variant="success">REGISTER</Button>
                   <Button variant="danger" onClick={clearData}>RESET</Button>
                 </Container>
+
+                </Form>
 
               </Card.Body>
             </Card>
