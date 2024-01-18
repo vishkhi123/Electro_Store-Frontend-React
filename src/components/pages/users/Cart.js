@@ -1,9 +1,14 @@
 import React from 'react'
+import Base from './Base'
 
 const Cart = () => {
   return (
+
     <div>
-      This is Cart Page
+    <Base>
+    This is Cart Page
+    </Base>
+     
     </div>
   )
 }

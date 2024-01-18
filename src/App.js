@@ -11,7 +11,9 @@ import Services from './components/pages/users/Services';
 import Cart from './components/pages/users/Cart';
 import CustomNavbar from './components/pages/users/CustomNavbar';
 import Contact from './components/pages/users/Contact';
-import { Flip, ToastContainer, Zoom } from 'react-toastify';
+import { Flip, ToastContainer} from 'react-toastify';
+import Login from './components/pages/users/Login';
+import Register from './components/pages/users/Register';
 
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
        <Route path='/services' element=<Services/> />
        <Route path='/cart' element=<Cart/> />
        <Route path='/contact' element=<Contact/> />
+       <Route path='/login' element=<Login/> />
+       <Route path='/register' element=<Register/> />
        <Route path='/user' element=<Dashboard/> >
              {/*nested route me "/" allowed nai he and parent me outlet dena padega */}
            <Route path='profile' element=<Profile/>/>

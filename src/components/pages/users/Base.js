@@ -7,7 +7,7 @@ const Base = ({title="Page Title",description="Welcome to dynamic Store",
 buttonEnabled=false,buttonText="Show Now",buttonType='btn btn-primary',buttonlink='/',children}) => {
 
 let styleContainer={
-    background:"grey",
+    
     height:"200px"
     
 }
@@ -15,7 +15,7 @@ let styleContainer={
   return (
     <div>
       
-      <Container fluid style={styleContainer} className='text-center p-5 d-flex justify-content-center align-items-center' >
+      <Container fluid style={styleContainer} className='bg-dark text-white text-center p-5 d-flex justify-content-center align-items-center' >
 
           <div>
 

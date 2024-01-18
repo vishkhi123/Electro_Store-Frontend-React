@@ -36,9 +36,9 @@ const CustomNavbar = () => {
             <Nav.Link as={NavLink} to={'/contact'}>Contact Us</Nav.Link>
           </Nav>
           <Nav>
-          <Nav.Link href="#deets">Cart</Nav.Link>
-            <Nav.Link href="#deets">Login</Nav.Link>
-            <Nav.Link href="#deets">Sign Up</Nav.Link>
+          <Nav.Link as={NavLink} to={'/cart'}>Cart</Nav.Link>
+            <Nav.Link as={NavLink} to={'/login'}>Login</Nav.Link>
+            <Nav.Link as={NavLink} to={'/register'}>Sign Up</Nav.Link>
             
           </Nav>
         </Navbar.Collapse>
