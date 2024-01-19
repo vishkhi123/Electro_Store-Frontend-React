@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Base from "./Base";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { registerUser } from "../services/user.service";
@@ -30,6 +30,8 @@ const Register = () => {
       isError:false,
       errorData:null
     })
+
+    const [loading,setLoading]=useState(false)
 
     const clearData=()=>{
       toast.info("Reset")
@@ -86,6 +88,7 @@ const Register = () => {
       }
       //call api
       //Now Register User
+      setLoading(true)
       registerUser(data)
       .then(userData=>{
         console.log(userData);
@@ -99,6 +102,8 @@ const Register = () => {
           errorData:error
         })
         toast.error("Error in creating user ! Try Again")
+      }).finally(()=>{
+        setLoading(false)
       })
 
     }
@@ -116,7 +121,7 @@ const Register = () => {
             <Card className="my-2 border-0 shadow-lg" style={
               {
                 position:'relative',
-                top:-80
+                top:-60
               }
             }
               >
@@ -234,7 +239,20 @@ const Register = () => {
                 </Container>
 
                 <Container className="text-center">
-                  <Button type="submit" className="m-2" variant="success">REGISTER</Button>
+                  <Button type="submit" 
+                  className="m-2" 
+                  variant="success"
+                  disabled={loading}
+                  >
+                 <Spinner
+                  animation="border"
+                  size="sm"
+                  className="me-2"
+                  hidden={!loading}
+                 />
+                  <span hidden={!loading}>Wait...</span>
+                  <span hidden={loading}>REGISTER</span> 
+                  </Button>
                   <Button variant="danger" onClick={clearData}>RESET</Button>
                 </Container>
 
