@@ -1,6 +1,7 @@
 import Base from "./Base";
 import React, { useState } from "react";
 import {
+  Alert,
   Button,
   Card,
   Col,
@@ -9,11 +10,14 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { userLogin } from "../services/user.service";
 
 const Login = () => {
+
+  let redirect=useNavigate();
+
   let [data, setData] = useState({
     email: "",
     password: "",
@@ -67,6 +71,11 @@ const Login = () => {
           errorData: null,
           isError: false,
         });
+        //redirect to dashboard
+        //1.Normal user redirected to dashboard 
+        redirect('/user/profile')
+        //2.Admin user redirected to dashboard
+        
       })
       .catch((error) => {
         //console.log(error);
@@ -106,6 +115,14 @@ const Login = () => {
                   </Container>
 
                   <h3 className="mb-4 text-center">Store Login Here</h3>
+
+                  <Alert onClose={()=>setError({
+                    isError:false,
+                    errorData:null
+                  })} 
+                  dismissible variant="danger" show={error.isError}>
+                    {error.errorData?.response?.data?.message}
+                  </Alert>
 
                   <Form noValidate onSubmit={submitForm}>
                     {/* User Email */}
