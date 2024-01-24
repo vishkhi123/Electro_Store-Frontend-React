@@ -1,5 +1,5 @@
 import Base from "./Base";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Alert,
   Button,
@@ -13,10 +13,13 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { userLogin } from "../services/user.service";
+import UserContext from "../../context/user.context";
 
 const Login = () => {
 
-  let redirect=useNavigate();
+  const userContext=useContext(UserContext);
+
+  const redirect=useNavigate();
 
   let [data, setData] = useState({
     email: "",
@@ -64,16 +67,22 @@ const Login = () => {
     setLoading(true);
     //Login User
     userLogin(data)
-      .then((userData) => {
-        console.log(userData);
+      .then((data) => {
+        console.log(data);
         toast.success("SuccessFully Logged In!!");
         setError({
           errorData: null,
           isError: false,
         });
+
+        //set data in userContext for state management
+        userContext.setIsLogin(true)
+        userContext.setUserData(data)
+
+
         //redirect to dashboard
         //1.Normal user redirected to dashboard 
-        redirect('/user/profile')
+        redirect('/user/home')
         //2.Admin user redirected to dashboard
         
       })
@@ -92,6 +101,7 @@ const Login = () => {
     const LoginForm = () => {
       return (
         <Container>
+        {JSON.stringify(userContext)}
           {/* Single Row==>12 grids(1col) */}
           <Row>
             {/* {JSON.stringify(data)} */}

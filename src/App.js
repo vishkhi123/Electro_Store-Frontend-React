@@ -14,6 +14,8 @@ import Contact from './components/pages/users/Contact';
 import { Flip, ToastContainer} from 'react-toastify';
 import Login from './components/pages/users/Login';
 import Register from './components/pages/users/Register';
+import Home from './components/pages/users/Home';
+import UserProvider from './components/context/user.provider';
 
 
 function App() {
@@ -21,7 +23,7 @@ function App() {
  
   return (
   // setting up routing 
-   
+    <UserProvider>
      <BrowserRouter>
      <ToastContainer 
       theme='dark'
@@ -40,12 +42,14 @@ function App() {
        <Route path='/user' element=<Dashboard/> >
              {/*nested route me "/" allowed nai he and parent me outlet dena padega */}
            <Route path='profile' element=<Profile/>/>
+           <Route path='home' element=<Home/>/>
            <Route path='aboutUser' element=<AboutUser/>/>
 
        </Route>
      </Routes>
      
    </BrowserRouter>
+   </UserProvider>
 
 
 
