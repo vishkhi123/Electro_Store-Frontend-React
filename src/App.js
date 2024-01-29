@@ -26,6 +26,8 @@ function App() {
     <UserProvider>
      <BrowserRouter>
      <ToastContainer 
+     position="bottom-center"
+     closeOnClick
       theme='dark'
       transition={Flip}
      />

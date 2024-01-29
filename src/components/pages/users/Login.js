@@ -76,9 +76,10 @@ const Login = () => {
         });
 
         //set data in userContext for state management
-        userContext.setIsLogin(true)
-        userContext.setUserData(data)
+        // userContext.setIsLogin(true)
+        // userContext.setUserData(data)
 
+        userContext.login(data)
 
         //redirect to dashboard
         //1.Normal user redirected to dashboard 
