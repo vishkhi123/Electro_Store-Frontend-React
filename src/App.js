@@ -17,6 +17,9 @@ import Register from './components/pages/users/Register';
 import Home from './components/pages/users/Home';
 import UserProvider from './components/context/user.provider';
 import Order from './components/pages/users/Order';
+import AdminDashboard from './components/pages/admin/AdminDashboard';
+import AdminHome from './components/pages/admin/AdminHome';
+import AddProduct from './components/pages/admin/AddProduct';
 
 
 function App() {
@@ -50,6 +53,11 @@ function App() {
            <Route path='orders' element=<Order/>/>
 
        </Route>
+
+      <Route path='/admin' element=<AdminDashboard/>>
+          <Route path='home' element=<AdminHome/>/>
+          <Route path='addProduct' element=<AddProduct/>/>
+      </Route>
      </Routes>
      
    </BrowserRouter>
