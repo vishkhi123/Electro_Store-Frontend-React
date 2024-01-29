@@ -16,6 +16,7 @@ import Login from './components/pages/users/Login';
 import Register from './components/pages/users/Register';
 import Home from './components/pages/users/Home';
 import UserProvider from './components/context/user.provider';
+import Order from './components/pages/users/Order';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
            <Route path='profile' element=<Profile/>/>
            <Route path='home' element=<Home/>/>
            <Route path='aboutUser' element=<AboutUser/>/>
+           <Route path='orders' element=<Order/>/>
 
        </Route>
      </Routes>
