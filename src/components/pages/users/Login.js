@@ -47,6 +47,10 @@ const Login = () => {
       email: "",
       password: "",
     });
+    setError({
+      errorData:null,
+      isError:false
+    })
   };
 
   const submitForm = (event) => {

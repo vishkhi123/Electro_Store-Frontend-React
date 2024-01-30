@@ -50,3 +50,20 @@ export const getDataFromLocalStorage=()=>{
 export const doLogoutFromLocalStorage=()=>{
     localStorage.removeItem("userData");
 }
+
+//Admin
+
+export const isAdminUser=()=>{
+    if(isLoggedIn())
+    {
+        const user=getUserFromLocalStorage();
+        const roles= user.roles;
+        if(roles.find((role)=>role.roleId=="wetrsdfwetwfasfwdf"))
+        return true;
+    else
+        return false;
+    }
+    else
+    return false;
+   
+}
