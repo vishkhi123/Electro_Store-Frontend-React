@@ -12,3 +12,9 @@ export const userLogin=(userData)=>{
     .then((response)=>response.data)
 
 }
+
+//get user data by userID
+export const getUser=(userId)=>{
+    publicAxios.get('/users/${userId}').then((response)=>response.data)
+
+}
