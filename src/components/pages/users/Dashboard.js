@@ -14,7 +14,7 @@ const Dashboard=()=>{
     const dashboardView=()=>{
         return(
             <div>
-              This Is User Dashboard
+            
               <Outlet/>
             </div>
 
