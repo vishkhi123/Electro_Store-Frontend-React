@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import UserProfileView from './UserProfileView'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Alert, Col, Container, Row } from 'react-bootstrap'
 import UserContext from '../../context/user.context'
 import { getUser } from '../services/user.service'
 import { toast } from 'react-toastify'
@@ -9,22 +9,29 @@ import { toast } from 'react-toastify'
 const Profile = () => {
 
   const userContext=useContext(UserContext);
+  const [user,setUser]=useState(null);
 
   useEffect(()=>{
-    getUserDataFromServer();
-  },[])
+    if(userContext.userData)
+     
+    {getUserDataFromServer();
+    }
+    },[userContext.userData])
   
   const getUserDataFromServer=()=>{
     //api call
+    console.log(userContext)
     const userId=userContext.userData.user.userId;
 
     getUser(userId)
      .then(data=>{
       console.log(data)
+     setUser(data)
      })
      .catch(error=>{
       console.log(error)
-      toast.error("Erroe in loading user information from server!!")
+      setUser(null)
+      toast.error("Error in loading user information from server!!")
      })
   }
 
@@ -40,16 +47,17 @@ const Profile = () => {
           }
         }>
 
-<UserProfileView user={{
-        'name':'Priyanka Krishna Khiratkar',
-        email:'priyanka@gmail.com',
-        gender:"female",
-        about:'Home Maker',
-        roles:[{roleName:'Admin'},
         {
-          roleName:'Normal'
-        }]
-      }}/>
+          (user ? (
+            <UserProfileView 
+            user={ user }/>
+          ):<Alert>
+          <h1 className='text-center text-uppercase m-2'>User Not Loaded from server !!</h1>
+          </Alert>
+          )
+        }
+
+
       
 
         </Col>

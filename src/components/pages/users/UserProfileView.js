@@ -21,7 +21,7 @@ const UserProfileView = ({user=null}) => {
         <Card.Body>
         <Container className='text-center my-3'>
         
-            <img className='border border-primary' style={profileStyle} src={user.imageName ? BASE_URL+'/users/image'+user.userId : "/assets/priyanka.jpg" } alt="Profile" />
+            <img className='border border-primary' style={profileStyle} src={user.imageName ? BASE_URL+'/users/image'+user.userId : "/assets/profile.avif" } alt="Profile" />
         </Container>
             <h3 className='text-center text-uppercase fw-bold text-primary'>{(user.name)? user.name:'Dummy User'}</h3>
             <div className='mt-3'>
@@ -51,7 +51,7 @@ const UserProfileView = ({user=null}) => {
                         </tr>
                         <tr>
                             <td>Roles</td>
-                            <td>{user.roles.map(role=>  role.roleName)}</td>
+                            <td>{user.roles.map(role=>  <div key={role.roleId}>{role.roleName}</div>)}</td>
                         </tr>
                     </tbody>
                 </Table>
