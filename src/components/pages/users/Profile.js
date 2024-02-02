@@ -4,6 +4,7 @@ import { Alert, Col, Container, Row } from 'react-bootstrap'
 import UserContext from '../../context/user.context'
 import { getUser } from '../services/user.service'
 import { toast } from 'react-toastify'
+import { useParams } from 'react-router-dom'
 
 
 const Profile = () => {
@@ -11,17 +12,22 @@ const Profile = () => {
   const userContext=useContext(UserContext);
   const [user,setUser]=useState(null);
 
+  const {userId}=useParams()
+
   useEffect(()=>{
-    if(userContext.userData)
+    console.log(userContext)
+    console.log('data from url userid'+userId)
+    // if(userContext.userData)
      
-    {getUserDataFromServer();
-    }
+    // {getUserDataFromServer();
+    // }
+    getUserDataFromServer()
     },[userContext.userData])
   
   const getUserDataFromServer=()=>{
     //api call
-    console.log(userContext)
-    const userId=userContext.userData.user.userId;
+  //  console.log(userContext)
+  //  const userId=userContext.userData.user.userId;
 
     getUser(userId)
      .then(data=>{

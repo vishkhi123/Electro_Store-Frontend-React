@@ -6,9 +6,10 @@ import { BASE_URL } from '../services/helperService'
 const UserProfileView = ({user=null}) => {
 
     const profileStyle={
-         maxHeight:'150px',
-         maxWidth:'230px',
+         height:'200px',
+         width:'200px',
          borderRadius:'50%',
+         objectFit:'contain'
          
     }
 
@@ -21,7 +22,7 @@ const UserProfileView = ({user=null}) => {
         <Card.Body>
         <Container className='text-center my-3'>
         
-            <img className='border border-primary' style={profileStyle} src={user.imageName ? BASE_URL+'/users/image'+user.userId : "/assets/profile.avif" } alt="Profile" />
+            <img className='border border-primary' style={profileStyle} src={user.imageName ? BASE_URL+'/users/image/'+user.userId : "/assets/profile.avif" } alt="Profile" />
         </Container>
             <h3 className='text-center text-uppercase fw-bold text-primary'>{(user.name)? user.name:'Dummy User'}</h3>
             <div className='mt-3'>
