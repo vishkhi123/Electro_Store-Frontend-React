@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import UserProfileView from './UserProfileView'
 import { Alert, Button, Card, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap'
 import UserContext from '../../context/user.context'
-import { getUser } from '../services/user.service'
+import { getUser, updateUser } from '../services/user.service'
 import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 
@@ -55,6 +55,23 @@ const Profile = () => {
 
   }
 
+  const updateUserData=()=>{
+    console.log("Updating User Data")
+    if(user.name===undefined || user.name.trim()==='')
+    {
+      toast.error("User name required !!")
+      return
+    }
+    //... rest of the world
+    updateUser(user).then(updatedUser=>{
+      console.log(updatedUser)
+      toast.success("User detail updated!!")
+    }).catch(error=>{
+      console.log(error)
+      toast.error("Not updated!!!")
+    })
+  }
+
   //update View
   const updateViewModal=()=>{
     return(
@@ -88,7 +105,11 @@ const Profile = () => {
                         <tr>
                             <td>New Password</td>
                             <td>
-                            <Form.Control placeholder='Enter new Password here !!!' type='Password'/>
+                            <Form.Control
+                             placeholder='Enter new Password here !!!'
+                             type='Password'
+                             onChange={(event)=>updateFileHandler(event,'password')}
+                             />
                             </td>
                         </tr>
                         <tr>
@@ -98,7 +119,11 @@ const Profile = () => {
                         <tr>
                             <td>About</td>
                             <td>
-                            <Form.Control as={'textarea'}   value={user.about} rows={8}/>
+                            <Form.Control as={'textarea'}   
+                            value={user.about} 
+                            rows={8}
+                            onChange={(event)=>updateFileHandler(event,'about')}
+                            />
                             </td>
                         </tr>
                         <tr>
@@ -114,7 +139,7 @@ const Profile = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={updateUserData}>
             Save Changes
           </Button>
         </Modal.Footer>
