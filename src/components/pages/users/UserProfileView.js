@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { Button, Card, Container, Table } from 'react-bootstrap'
 import { BASE_URL } from '../services/helperService'
+import UserContext from '../../context/user.context'
 
-const UserProfileView = ({user=null}) => {
+const UserProfileView = ({user=null , handleShowModal}) => {
+
+    const {userData,isLogin}=useContext(UserContext);
 
     const profileStyle={
          height:'200px',
@@ -59,10 +62,14 @@ const UserProfileView = ({user=null}) => {
                     </Card.Body>
                 </Card>
             </div>
-            <Container className='text-center mt-3'>
-                <Button  variant='success' size='md'>Update</Button>
+            {(isLogin && userData.user.userId===user.userId)? (
+                <Container className='text-center mt-3'>
+                <Button  variant='success' size='md' onClick={handleShowModal}>Update</Button>
                 <Button className='ms-2' variant='warning' size='md'>Orders</Button>
             </Container>
+            ) : 
+            ' '
+            }
         </Card.Body>
       </Card>))
       }
