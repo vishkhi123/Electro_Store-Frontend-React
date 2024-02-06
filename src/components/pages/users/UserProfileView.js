@@ -25,7 +25,7 @@ const UserProfileView = ({user=null , handleShowModal}) => {
         <Card.Body>
         <Container className='text-center my-3'>
         
-            <img className='border border-primary' style={profileStyle} src={user.imageName ? BASE_URL+'/users/image/'+user.userId : "/assets/profile.avif" } alt="Profile" />
+            <img className='border border-primary' style={profileStyle} src={user.imageName ? BASE_URL+'/users/image/'+user.userId+'?'+new Date().getTime() : "/assets/profile.avif" } alt="Profile" />
         </Container>
             <h3 className='text-center text-uppercase fw-bold text-primary'>{(user.name)? user.name:'Dummy User'}</h3>
             <div className='mt-3'>

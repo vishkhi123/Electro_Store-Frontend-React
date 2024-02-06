@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import UserProfileView from './UserProfileView'
 import { Alert, Button, Card, Col, Container, Form, Modal, Row, Spinner, Table } from 'react-bootstrap'
 import UserContext from '../../context/user.context'
-import { getUser, updateUser } from '../services/user.service'
+import { getUser, updateUser, updateUserProfile } from '../services/user.service'
 import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
 
@@ -63,6 +63,7 @@ const Profile = () => {
 
   }
 
+  //update user data by calling
   const updateUserData=()=>{
     console.log("Updating User Data")
     if(user.name===undefined || user.name.trim()==='')
@@ -75,7 +76,31 @@ const Profile = () => {
     updateUser(user).then(updatedUser=>{
       console.log(updatedUser)
       toast.success("User detail updated!!")
-      handleClose()
+      //update image
+      if(image.file===null)
+      {
+        setUpdateLoading(false)
+        handleClose()
+        return
+      }
+      updateUserProfile(image.file,user.userId)
+      .then(data=>{
+        console.log(data)
+        toast.success(data.message)
+        handleClose()
+        
+      })
+      .catch((error)=>{
+        console.log(error)
+        toast.error("Image not Uploaded!!")
+      })
+      .finally(()=>{
+        setUpdateLoading(false)
+      })
+
+
+
+     // handleClose()
     }).catch(error=>{
      // console.log(error)
     //  if(error.response.status==400)
@@ -84,9 +109,7 @@ const Profile = () => {
     //  } 
      toast.error("Not updated!!!")
     })
-    .finally(()=>{
-      setUpdateLoading(false)
-    })
+    
   }
 
   //funtion For Image Change
@@ -139,7 +162,7 @@ const Profile = () => {
                       <td>
                        {/* image Tag for Preview */}
                        <Container className='text-center mb-3'>
-                       <img height={200} width={200} src={image.placeholder} alt="" />
+                       <img style={{objectFit:'contain'}} height={200} width={200} src={image.placeholder} alt="" />
                        </Container>
                        
                         <Form.Control type='file' onChange={handelProfileImage}  />
