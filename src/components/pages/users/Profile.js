@@ -12,6 +12,12 @@ const Profile = () => {
   const userContext=useContext(UserContext);
   const [user,setUser]=useState(null);
 
+  //state to handel image
+  const [image,setImage]=useState({
+    placeholder:"/assets/profile.avif",
+    file:null
+  })
+
   //modal state
   const [show, setShow] = useState(false);
 
@@ -83,6 +89,31 @@ const Profile = () => {
     })
   }
 
+  //funtion For Image Change
+  const handelProfileImage=(event)=>{
+  //  const localFile=event.target.files[0]
+    console.log(event.target.files[0])
+    if(event.target.files[0].type==='image/png' || event.target.files[0].type==='image/jpeg' )
+    {
+      //preview
+      const reader=new FileReader()
+      reader.onload=(r)=>{
+        setImage({
+          placeholder:r.target.result,
+          file:event.target.files[0]
+        })
+        console.log(r.target.result)
+      }
+
+      reader.readAsDataURL(event.target.files[0])
+
+    }
+    else{
+      toast.error('Invalid File Type !!')
+      image.file=null
+    }
+  }
+
   //update View
   const updateViewModal=()=>{
     return(
@@ -100,6 +131,22 @@ const Profile = () => {
                     <Card.Body>
                     <Table className='text-center ' responsive borderless hover >
                     <tbody>
+                    <tr>
+                      <td>
+                     
+                        Profile Image
+                      </td>
+                      <td>
+                       {/* image Tag for Preview */}
+                       <Container className='text-center mb-3'>
+                       <img height={200} width={200} src={image.placeholder} alt="" />
+                       </Container>
+                       
+                        <Form.Control type='file' onChange={handelProfileImage}  />
+                        <p className='mt-2 text-muted'>Select Square size picture for better ui. </p>
+
+                      </td>
+                    </tr>
                         <tr>
                             <td>Name</td>
                             <td>
@@ -121,7 +168,7 @@ const Profile = () => {
                              type='Password'
                              onChange={(event)=>updateFileHandler(event,'password')}
                              />
-                             <p>Leave the field blank for same password!!!</p>
+                             <p className='mt-2 text-muted'>Leave the field blank for same password!!!</p>
                             </td>
                         </tr>
                         <tr>
