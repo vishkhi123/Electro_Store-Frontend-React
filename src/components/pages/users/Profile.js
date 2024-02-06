@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import UserProfileView from './UserProfileView'
-import { Alert, Button, Card, Col, Container, Form, Modal, Row, Spinner, Table } from 'react-bootstrap'
+import { Alert, Button, Card, Col, Container, Form, InputGroup, Modal, Row, Spinner, Table } from 'react-bootstrap'
 import UserContext from '../../context/user.context'
 import { getUser, updateUser, updateUserProfile } from '../services/user.service'
 import { toast } from 'react-toastify'
@@ -137,6 +137,14 @@ const Profile = () => {
     }
   }
 
+  //clear image
+  const clearImage=(event)=>{
+    setImage({
+      placeholder:"/assets/profile.avif",
+      file:null
+    })
+  }
+
   //update View
   const updateViewModal=()=>{
     return(
@@ -164,8 +172,11 @@ const Profile = () => {
                        <Container className='text-center mb-3'>
                        <img style={{objectFit:'contain'}} height={200} width={200} src={image.placeholder} alt="" />
                        </Container>
-                       
-                        <Form.Control type='file' onChange={handelProfileImage}  />
+                       <InputGroup>
+                       <Form.Control type='file' onChange={handelProfileImage}  />
+                       <Button onClick={clearImage} variant='outline-secondary'>Clear</Button>
+                       </InputGroup>
+                        
                         <p className='mt-2 text-muted'>Select Square size picture for better ui. </p>
 
                       </td>
