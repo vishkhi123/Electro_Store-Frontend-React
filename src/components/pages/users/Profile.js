@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import UserProfileView from './UserProfileView'
-import { Alert, Button, Card, Col, Container, Form, Modal, Row, Table } from 'react-bootstrap'
+import { Alert, Button, Card, Col, Container, Form, Modal, Row, Spinner, Table } from 'react-bootstrap'
 import UserContext from '../../context/user.context'
 import { getUser, updateUser } from '../services/user.service'
 import { toast } from 'react-toastify'
@@ -14,6 +14,8 @@ const Profile = () => {
 
   //modal state
   const [show, setShow] = useState(false);
+
+  const [updateLoading,setUpdateLoading]=useState(false);
 
   const handleClose = () => setShow(false);
   const handleShowModal = () => setShow(true);
@@ -63,12 +65,21 @@ const Profile = () => {
       return
     }
     //... rest of the world
+    setUpdateLoading(true);
     updateUser(user).then(updatedUser=>{
       console.log(updatedUser)
       toast.success("User detail updated!!")
+      handleClose()
     }).catch(error=>{
-      console.log(error)
-      toast.error("Not updated!!!")
+     // console.log(error)
+    //  if(error.response.status==400)
+    //  {
+    //   toast.error(error.response.name)
+    //  } 
+     toast.error("Not updated!!!")
+    })
+    .finally(()=>{
+      setUpdateLoading(false)
     })
   }
 
@@ -110,6 +121,7 @@ const Profile = () => {
                              type='Password'
                              onChange={(event)=>updateFileHandler(event,'password')}
                              />
+                             <p>Leave the field blank for same password!!!</p>
                             </td>
                         </tr>
                         <tr>
@@ -139,8 +151,15 @@ const Profile = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={updateUserData}>
-            Save Changes
+          <Button variant="primary" onClick={updateUserData} disabled={updateLoading}>
+          <Spinner
+            animation='border'
+            size='sm'
+            hidden={!updateLoading}
+            className='me-2'
+          />
+            <span hidden={!updateLoading}>Updating</span> 
+            <span hidden={updateLoading}>Save Changes</span>
           </Button>
         </Modal.Footer>
       </Modal>
