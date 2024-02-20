@@ -19,7 +19,12 @@ import UserProvider from './components/context/user.provider';
 import Order from './components/pages/users/Order';
 import AdminDashboard from './components/pages/admin/AdminDashboard';
 import AdminHome from './components/pages/admin/AdminHome';
-import AddProduct from './components/pages/admin/AddProduct';
+import AddProduct from './components/admin/AddProduct';
+import AddCategory from './components/admin/AddCategory';
+import ViewCategories from './components/admin/ViewCategories';
+import ViewProducts from './components/admin/ViewProducts';
+import AdminOrders from './components/admin/AdminOrders';
+import AdminUsers from './components/admin/AdminUsers';
 
 
 function App() {
@@ -58,6 +63,11 @@ function App() {
       <Route path='/admin' element=<AdminDashboard/>>
           <Route path='home' element=<AdminHome/>/>
           <Route path='addProduct' element=<AddProduct/>/>
+          <Route path='addCategory' element=<AddCategory/>/>
+          <Route path='categories' element=<ViewCategories/>/>
+          <Route path='products' element=<ViewProducts/>/>
+          <Route path='adminOrders' element=<AdminOrders/>/>
+          <Route path='adminUsers' element=<AdminUsers/>/>
       </Route>
      </Routes>
      
