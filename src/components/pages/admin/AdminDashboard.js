@@ -20,7 +20,10 @@ const AdminDashboard = () => {
             }} className=''>
              <SideMenu/>
             </Col>
-            <Col md={8} className=''>
+            {/* <Col md={1}>
+
+            </Col> */}
+            <Col md={9} className='ps-3 pt-2'>
               <Outlet/>
             </Col>
           </Row>

@@ -19,3 +19,6 @@ import 'bootstrap/dist/css/bootstrap.min.css' //copy this line in index.js
 Step-3
 Configure router in react
 npm install react-router-dom
+
+To install react-icons
+npm install react-icons
